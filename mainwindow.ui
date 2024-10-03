@@ -34,8 +34,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">padding-left: 80px ;
-background: grey ;</string>
+     <string notr="true">background: grey ;</string>
     </property>
     <property name="text">
      <string/>

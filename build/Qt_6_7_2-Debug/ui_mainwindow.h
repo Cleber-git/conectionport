@@ -51,8 +51,7 @@ public:
         font.setPointSize(32);
         font.setBold(false);
         label->setFont(font);
-        label->setStyleSheet(QString::fromUtf8("padding-left: 80px ;\n"
-"background: grey ;"));
+        label->setStyleSheet(QString::fromUtf8("background: grey ;"));
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName("label_2");
         label_2->setGeometry(QRect(170, 60, 131, 61));

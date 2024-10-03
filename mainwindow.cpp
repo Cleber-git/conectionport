@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    m_serial.setPortName("com1");
+    m_serial.setPortName("com3");
     m_serial.setBaudRate(9600);
     m_serial.setParity(QSerialPort::NoParity);
     m_serial.setStopBits(QSerialPort::OneStop);
@@ -37,16 +37,25 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    if(m_isConected){
-        QByteArray data = ui->lineEdit->text().toLocal8Bit();
-        if(m_serial.waitForBytesWritten(1000)){
-            ui->label_2->setText("Comando enviado!");
-        }
-        if(m_serial.waitForReadyRead(3000))
-        {
-            ui->label_2->setText("Resposta recebida");
-            ui->label->setText(m_serial.readAll());
-        }
+    qDebug()<< "send";
+
+    QString input = ui->lineEdit->text();
+    QByteArray data = QByteArray::fromHex(input.toLocal8Bit());
+
+    if(m_serial.write(data) == -1){
+        ui->label_2->setText("erro");
+        return;
+    }
+    if(m_serial.waitForBytesWritten(1000)){
+        qDebug()<< "ok";
+
+        ui->label_2->setText("Comando enviado!");
+    }
+    if(m_serial.waitForReadyRead(3000))
+    {
+        ui->label_2->setText("Resposta recebida");
+        ui->label->setText(m_serial.readAll().toHex());
+        m_serial.close();
     }
 }
 
