@@ -45,7 +45,8 @@ constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::string
     "on_pushButton_3_clicked",
     "isExist",
     "QComboBox*",
-    "combobox"
+    "combobox",
+    "on_pushButton_4_clicked"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -58,7 +59,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -66,14 +67,15 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   50,    2, 0x06,    1 /* Public */,
+       1,    1,   56,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       3,    0,   53,    2, 0x08,    3 /* Private */,
-       4,    0,   54,    2, 0x08,    4 /* Private */,
-       5,    1,   55,    2, 0x08,    5 /* Private */,
-       7,    0,   58,    2, 0x08,    7 /* Private */,
-       8,    2,   59,    2, 0x08,    8 /* Private */,
+       3,    0,   59,    2, 0x08,    3 /* Private */,
+       4,    0,   60,    2, 0x08,    4 /* Private */,
+       5,    1,   61,    2, 0x08,    5 /* Private */,
+       7,    0,   64,    2, 0x08,    7 /* Private */,
+       8,    2,   65,    2, 0x08,    8 /* Private */,
+      11,    0,   70,    2, 0x08,   11 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    2,
@@ -84,6 +86,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
     QMetaType::Void, QMetaType::QString,    6,
     QMetaType::Void,
     QMetaType::Bool, QMetaType::QString, 0x80000000 | 9,    6,   10,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -112,7 +115,9 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         // method 'isExist'
         QtPrivate::TypeAndForceComplete<bool, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QComboBox *, std::false_type>
+        QtPrivate::TypeAndForceComplete<QComboBox *, std::false_type>,
+        // method 'on_pushButton_4_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
@@ -130,6 +135,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 4: _t->on_pushButton_3_clicked(); break;
         case 5: { bool _r = _t->isExist((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QComboBox*>>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
+        case 6: _t->on_pushButton_4_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -174,13 +180,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

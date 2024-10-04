@@ -31,6 +31,8 @@ private slots:
     void on_pushButton_3_clicked();
     bool isExist(QString arg1, QComboBox *combobox);
 
+    void on_pushButton_4_clicked();
+
 signals:
     void sendPortalInfo(const QString);
 private:

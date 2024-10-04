@@ -98,6 +98,33 @@ bool MainWindow::isExist(QString arg1, QComboBox* combobox){
     return true;
 }
 
+void MainWindow::on_pushButton_4_clicked()
+{
+    QString input = "90070201" + ui->lineEdit_2->text()+ "0003";
+    QByteArray data = QByteArray::fromHex(input.toLocal8Bit());
+
+    if(m_serial.write(data) == -1){
+        ui->label_2->setText("erro");
+        return;
+    }
+    if(m_serial.waitForBytesWritten(1000)){
+        qDebug()<< "ok";
+
+        ui->label_2->setText("Comando enviado!");
+    }
+    if(m_serial.waitForReadyRead(3000))
+    {
+        // QString response = m_serial.readAll().toHex().contains(85)? "ABERTA": "ERRO";
+        ui->label_2->setText("Resposta recebida");
+        ui->label->setText(m_serial.readAll().toHex());
+        m_serial.close();
+    }
+
+}
+
+
+
+
 
 
 
