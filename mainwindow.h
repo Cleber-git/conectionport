@@ -6,6 +6,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 #include "dialog.h"
+#include <QComboBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -28,6 +29,7 @@ private slots:
     void on_comboBox_currentTextChanged(const QString &arg1);
 
     void on_pushButton_3_clicked();
+    bool isExist(QString arg1, QComboBox *combobox);
 
 signals:
     void sendPortalInfo(const QString);

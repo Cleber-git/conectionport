@@ -79,7 +79,9 @@ void MainWindow::on_pushButton_3_clicked()
         ui->comboBox->clear();
     }
     for (const QSerialPortInfo &portInfo: serialPortsInfo) {
-        ui->comboBox->addItem(portInfo.portName());
+        if(!isExist(portInfo.portName(), ui->comboBox)){
+            ui->comboBox->addItem(portInfo.portName());
+        }
 
     }
     if(serialPortsInfo.size() == 1){
@@ -88,6 +90,27 @@ void MainWindow::on_pushButton_3_clicked()
     }
     // m_dialog->show();
 }
+
+bool MainWindow::isExist(QString arg1, QComboBox* combobox){
+    if(combobox->findText(arg1) == -1){
+        return false;
+    }
+    return true;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // lista todas as descrições de uma porta serial
