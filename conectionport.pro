@@ -11,11 +11,14 @@ CONFIG += c++17
 SOURCES += \
     dialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    connection/serialportconnection.cpp
 
 HEADERS += \
+    connection/abstract/abstractconnection.h \
     dialog.h \
-    mainwindow.h
+    mainwindow.h \
+    connection/serialportconnection.h
 
 FORMS += \
     dialog.ui \

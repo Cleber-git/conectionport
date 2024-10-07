@@ -5,8 +5,11 @@
 #include <QDebug>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
-#include "dialog.h"
 #include <QComboBox>
+
+#include "dialog.h"
+#include "connection/serialportconnection.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -33,11 +36,12 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+
 signals:
     void sendPortalInfo(const QString);
 private:
     Ui::MainWindow *ui;
-    QSerialPort m_serial;
+    SerialPortConnection m_serialPortConnection;
     bool m_isConected = false;
     Dialog *m_dialog;
 
