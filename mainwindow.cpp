@@ -13,7 +13,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     on_pushButton_3_clicked();
 
-    m_serial.setBaudRate(9600);
+    // m_serial.setBaudRate(QSerialPort::Baud9600);
+    // m_serial.setParity(QSerialPort::NoParity);
+    // m_serial.setStopBits(QSerialPort::OneStop);
+    // m_serial.setFlowControl(QSerialPort::NoFlowControl);
+    // m_serial.setDataBits(QSerialPort::Data8);
+
+
+    connect(&m_serial, SIGNAL(readyRead()), this, SLOT(receiverResponse()));
+    // serialPort->setPortName("COM1");  // Altere conforme necessário
+    m_serial.setBaudRate(QSerialPort::Baud9600);
+    m_serial.setDataBits(QSerialPort::Data8);
     m_serial.setParity(QSerialPort::NoParity);
     m_serial.setStopBits(QSerialPort::OneStop);
     m_serial.setFlowControl(QSerialPort::NoFlowControl);
@@ -62,9 +72,12 @@ void MainWindow::on_pushButton_2_clicked()
     {
         // QString response = m_serial.readAll().toHex().contains(85)? "ABERTA": "ERRO";
         ui->label_2->setText("Resposta recebida");
+        qDebug() << m_serial.readAll().toHex();
         QString response = m_serial.readAll().toHex().size()?"Abriu":"Erro na abertura";
         ui->label->setText(response);
+        m_serial.flush();
         m_serial.close();
+
     }
 }
 
@@ -84,7 +97,6 @@ void MainWindow::on_pushButton_3_clicked()
         if(!isExist(portInfo.portName(), ui->comboBox)){
             ui->comboBox->addItem(portInfo.portName());
         }
-
     }
     if(serialPortsInfo.size() == 1){
         qDebug() << "\n apenas uma porta";
@@ -118,9 +130,39 @@ void MainWindow::on_pushButton_4_clicked()
     {
         // QString response = m_serial.readAll().toHex().contains(85)? "ABERTA": "ERRO";
         ui->label_2->setText("Resposta recebida");
-        QString response = m_serial.readAll().toHex().size()?"Verificado":"Erro ao verificar";
+        QByteArray getRespposta = m_serial.readAll().toHex();
+        QString response = (getRespposta.size() == 14)?"Verificado":"Erro ao verificar";
+        qDebug() << getRespposta;
         ui->label->setText(response);
-        m_serial.close();
+        m_serial.flush();
+        // m_serial.close();,
     }
+
+}
+
+void MainWindow::receiverResponse(){
+    while(m_serial.waitForReadyRead(1000)){
+        QByteArray data = m_serial.readAll();
+        if(!data.isEmpty()){
+            m_buffer.append(data);
+
+            if(isComplete(m_buffer)){
+                qDebug()<< "Mensagem completa recebida:" << m_buffer.toHex();
+                m_buffer.clear();
+            }else{
+                qDebug() << m_buffer.toHex();
+                m_buffer.clear();
+            }
+        }
+    }
+
+}
+
+bool MainWindow::isComplete(const QByteArray _msg){
+    if(_msg.size() == 14){
+        qDebug() << "Mensagem Completa";
+        return true;
+    }
+    return false;
 
 }
