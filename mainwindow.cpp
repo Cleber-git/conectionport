@@ -42,6 +42,7 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
 
+    ui->label->clear();
     if(ui->lineEdit->text().isEmpty()) return;
     qDebug()<< "send";
 
@@ -61,7 +62,8 @@ void MainWindow::on_pushButton_2_clicked()
     {
         // QString response = m_serial.readAll().toHex().contains(85)? "ABERTA": "ERRO";
         ui->label_2->setText("Resposta recebida");
-        ui->label->setText(m_serial.readAll().toHex());
+        QString response = m_serial.readAll().toHex().size()?"Abriu":"Erro na abertura";
+        ui->label->setText(response);
         m_serial.close();
     }
 }
@@ -116,44 +118,9 @@ void MainWindow::on_pushButton_4_clicked()
     {
         // QString response = m_serial.readAll().toHex().contains(85)? "ABERTA": "ERRO";
         ui->label_2->setText("Resposta recebida");
-        ui->label->setText(m_serial.readAll().toHex());
+        QString response = m_serial.readAll().toHex().size()?"Verificado":"Erro ao verificar";
+        ui->label->setText(response);
         m_serial.close();
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// lista todas as descrições de uma porta serial
-/*
- *        qDebug() << "\n"
-                 << "Port:" << portInfo.portName() << "\n"
-                 << "Location:" << portInfo.systemLocation() << "\n"
-                 << "Description:" << portInfo.description() << "\n"
-                 << "Manufacturer:" << portInfo.manufacturer() << "\n"
-                 << "Serial number:" << portInfo.serialNumber() << "\n"
-                 << "Vendor Identifier:"
-                 << (portInfo.hasVendorIdentifier()
-                         ? QByteArray::number(portInfo.vendorIdentifier(), 16)
-                         : QByteArray()) << "\n"
-                 << "Product Identifier:"
-                 << (portInfo.hasProductIdentifier()
-                         ? QByteArray::number(portInfo.productIdentifier(), 16)
-                         : QByteArray());
-*/
